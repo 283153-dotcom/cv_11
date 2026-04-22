@@ -1,4 +1,5 @@
 import random
+import matplotlib.pyplot as plt
 
 
 def random_numbers(count, low=0, high=100):
@@ -24,11 +25,26 @@ def bubble_sort(my_numbers):
     n=len(my_numbers_bubble)
     #swtich=1
 
-    for i in range(n-1): #šlo by to taky přes počet výměn, while switch !=0
-        for idx in range(n-1-i):
-            if my_numbers_bubble[idx]>my_numbers_bubble[idx+1]: #switch +=1
-                my_numbers_bubble[idx],my_numbers_bubble[idx+1] = my_numbers_bubble[idx+1], my_numbers_bubble[idx]
+    plt.ion()
+    plt.show()
 
+    for i in range(n-1):    #šlo by to taky přes počet výměn, while switch !=0
+        for idx in range(n-1-i):
+            if my_numbers_bubble[idx]>my_numbers_bubble[idx+1]:     #switch +=1
+                my_numbers_bubble[idx], my_numbers_bubble[idx + 1] = my_numbers_bubble[idx + 1], my_numbers_bubble[idx]
+
+                index_highlight1 = idx
+                index_highlight2 = idx + 1
+                colors = ["steelblue"] * len(my_numbers_bubble)
+                colors[index_highlight1] = "tomato"
+                colors[index_highlight2] = "tomato"
+                plt.clf()
+                plt.bar(range(len(my_numbers_bubble)), my_numbers_bubble, color=colors)
+                plt.title("Bubble Sort")
+                plt.pause(0.1)
+
+    plt.ioff()
+    plt.show()
     return my_numbers_bubble
 
 
@@ -40,6 +56,9 @@ def main():
 
     sorted_numbers_bubble=bubble_sort(my_numbers)
     print(sorted_numbers_bubble)
+
+    my_numbers_bubble=bubble_sort(my_numbers)
+    print(my_numbers_bubble)
 
 
 
